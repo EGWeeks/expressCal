@@ -6,45 +6,31 @@ app.listen(8000, function() {
 });
 
 // WHEN a user goes to http://localhost:3000/add/num/num
-app.get("/add/:numOne/:numTwo", function (req, res) {
-  // setting each url property to a integer and assigned to var
-  var numOne = parseFloat(req.params.numOne); 
-  var numTwo = parseFloat(req.params.numTwo);
-  //add vars
-  var total = numOne + numTwo;
-  //send the total back
-  res.send("added " + total);
-});
+app.get("/:op/:numOne/:numTwo", function (req, res) {
+	var opp = req.params.op;
 
-// WHEN a user goes to http://localhost:3000/sub/num/num
-app.get("/sub/:numOne/:numTwo", function (req, res) {
-  // setting each url property to a integer and assigned to var
-  var numOne = parseFloat(req.params.numOne); 
-  var numTwo = parseFloat(req.params.numTwo);
-  //add vars
-  var total = numOne - numTwo;
-  //send the total back
-  res.send("subtracted " + total);
-});
+	// setting each url property to a integer and assigned to var
+	var numOne = parseFloat(req.params.numOne); 
+	var numTwo = parseFloat(req.params.numTwo);
+	var total;
+	if (opp === 'add') {
 
-// WHEN a user goes to http://localhost:3000/multi/num/num
-app.get("/multi/:numOne/:numTwo", function (req, res) {
-  // setting each url property to a integer and assigned to var
-  var numOne = parseFloat(req.params.numOne); 
-  var numTwo = parseFloat(req.params.numTwo);
-  //add vars
-  var total = numOne * numTwo;
-  //send the total back
-  res.send("multiplied " + total);
-});
+	  total = numOne + numTwo;
 
-// WHEN a user goes to http://localhost:3000/div/num/num
-app.get("/div/:numOne/:numTwo", function (req, res) {
-  // setting each url property to a integer and assigned to var
-  var numOne = parseFloat(req.params.numOne); 
-  var numTwo = parseFloat(req.params.numTwo);
-  //add vars
-  var total = numOne / numTwo;
-  //send the total back
-  res.send("divided " + total);
+	} else if (opp === 'sub') {
+  	
+  	 total = numOne - numTwo;
+  	
+	} else if (opp === 'multi'){
+
+		total = numOne * numTwo;
+
+	} else if(opp === 'div'){
+
+		total = numOne / numTwo;
+
+	} else {
+		total = "We have a problem.";
+	}
+	res.send("subtracted " + total);
 });
